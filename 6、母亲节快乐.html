@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母亲节快乐 - Happy Mother's Day</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Serif SC', serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #0A192F; /* Deep ocean blue */
+            color: #E0FBFC; /* Light cyan/white for text */
+            overflow-x: hidden;
+        }
+
+        .bento-grid {
+            display: grid;
+            gap: 1.5rem; /* Increased gap for better separation */
+            padding: 2rem;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .bento-item {
+            background-color: #172A46; /* Slightly lighter ocean blue */
+            border-radius: 1.25rem;
+            padding: 2.5rem; /* Increased padding */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #304A6E; /* Subtle border */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* To push icon/footer down if needed */
+        }
+
+        /* Highlight color gradients - Ocean Themed */
+        .highlight-deep-sea-blue {
+            background: linear-gradient(145deg, rgba(30, 58, 138, 0.4), rgba(30, 58, 138, 0.1)); /* Deeper blue */
+        }
+        .highlight-coral-reef {
+            background: linear-gradient(145deg, rgba(255, 125, 90, 0.25), rgba(255, 125, 90, 0.05)); /* Soft coral */
+        }
+        .highlight-seafoam-green {
+            background: linear-gradient(145deg, rgba(64, 186, 157, 0.25), rgba(64, 186, 157, 0.05)); /* Seafoam */
+        }
+        .highlight-sunken-treasure {
+            background: linear-gradient(145deg, rgba(247, 195, 74, 0.2), rgba(247, 195, 74, 0.05)); /* Goldish */
+        }
+         .highlight-pearl-white {
+            background: linear-gradient(145deg, rgba(224, 242, 254, 0.15), rgba(224, 242, 254, 0.03)); /* Pearly */
+        }
+
+
+        .ultralarge-text-cn {
+            font-size: 3.5rem; /* Adjusted for better fit in bento boxes */
+            font-weight: 700;
+            line-height: 1.2;
+            color: #93C5FD; /* Light blue for emphasis */
+        }
+        .large-text-cn {
+            font-size: 2rem;
+            font-weight: 700;
+             color: #E0FBFC;
+        }
+        .medium-text-cn { /* Main sentence text */
+            font-size: 1.75rem;
+            font-weight: 400; /* Regular weight for readability */
+            line-height: 1.6;
+             color: #E0FBFC;
+        }
+        .small-text-en {
+            font-size: 0.8rem;
+            color: #7AA2BF; /* Muted blue-grey for English text */
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .line-art-icon-container {
+            width: 50px;
+            height: 50px;
+            border: 1.5px solid #304A6E;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.5rem; /* Pushed down a bit */
+            align-self: flex-end; /* Align to the right */
+        }
+        .line-art-icon-container i {
+            font-size: 1.5rem;
+            color: #60A5FA; /* Brighter blue for icons */
+        }
+        
+        .bento-item > * {
+            position: relative;
+            z-index: 1;
+        }
+        .header-title-cn {
+            font-size: 3rem; /* Tailwind: text-5xl */
+            font-weight: 700;
+            color: #E0FBFC;
+        }
+        .header-subtitle-en {
+            font-size: 1.25rem; /* Tailwind: text-xl */
+            color: #A5D8FF;
+            margin-top: 0.5rem;
+        }
+
+        /* Custom scrollbar */
+        body::-webkit-scrollbar { width: 8px; }
+        body::-webkit-scrollbar-track { background: #0A192F; }
+        body::-webkit-scrollbar-thumb {
+            background-color: #1E3A5F;
+            border-radius: 10px;
+            border: 2px solid #0A192F;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <audio id="backgroundMusic" loop autoplay>
+      <source src="6、母亲节快乐 Tales From the Snow Mountain.mp3" type="audio/mpeg">
+    </audio>
+
+    <button onclick="document.getElementById('backgroundMusic').play()" class="fixed bottom-4 right-4 bg-sky-500 text-white p-3 rounded-full shadow-lg hover:bg-sky-600 transition-colors z-50">
+    <i class="fas fa-play"></i> 播放音乐
+    </button>
+
+    <header class="py-12 md:py-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="z-index: 0;">
+            <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" preserveAspectRatio="none"><path fill="#172A46" fill-opacity="1" d="M0,128L48,138.7C96,149,192,171,288,186.7C384,203,480,213,576,197.3C672,181,768,139,864,128C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+        <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "circOut" }}>
+            <h1 class="header-title-cn">祝天下所有的母亲</h1>
+            <h2 class="header-title-cn mt-1">节日快乐</h2>
+            <p class="header-subtitle-en">Happy Mother's Day to all mothers in the world!</p>
+        </motion.div>
+    </header>
+
+    <main class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        <motion.section
+            class="bento-item highlight-deep-sea-blue"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.1 }}
+        >
+            <div>
+                <p class="medium-text-cn">爱妈妈可不是<br/><span class="ultralarge-text-cn">母亲节</span>限定</p>
+                <p class="small-text-en">Loving mom is not just a Mother's Day special</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-infinity"></i></div>
+        </motion.section>
+
+        <motion.section
+            class="bento-item highlight-coral-reef"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.15 }}
+        >
+            <div>
+                <p class="medium-text-cn">妈妈不是超人<br/>却为我们变成了<span class="ultralarge-text-cn">万能</span></p>
+                <p class="small-text-en">Thank you for not being a superman, yet becoming omnipotent for me</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-fish"></i></div>
+        </motion.section>
+
+        <motion.section
+            class="bento-item highlight-seafoam-green"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.25 }}
+        >
+            <div>
+                <p class="medium-text-cn">我们的妈妈<br/><span class="ultralarge-text-cn">超厉害</span>的！</p>
+                <p class="small-text-en">My mom is super awesome!</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-ship"></i></div>
+        </motion.section>
+
+        <motion.section
+            class="bento-item highlight-sunken-treasure"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.1 }}
+        >
+            <div>
+                <p class="medium-text-cn">羡慕我爸娶到了<br/>这个世界上<span class="large-text-cn">最好的女人</span></p>
+                <p class="small-text-en">I envy my dad for marrying the best woman in the world</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-gem"></i></div>
+        </motion.section>
+
+        <motion.section
+            class="bento-item highlight-coral-reef"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.15 }}
+        >
+            <div>
+                <p class="medium-text-cn">在成为妈妈前<br/>她也只是个爱撒娇的<span class="large-text-cn">女孩</span></p>
+                <p class="small-text-en">Every mom, before becoming a mom, was also a sweet young girl</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-fan"></i></div> </motion.section>
+
+        <motion.section
+            class="bento-item highlight-deep-sea-blue"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.2 }}
+        >
+            <div>
+                <p class="medium-text-cn">别人关注我们钱包<br/>只有她关心我们<span class="large-text-cn">吃饱</span></p>
+                <p class="small-text-en">Others care about my wealth, only she cares about my well-being</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-anchor"></i></div>
+        </motion.section>
+
+        <motion.section
+            class="bento-item highlight-pearl-white"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.25 }}
+        >
+            <div>
+                <p class="medium-text-cn">妈妈的唠叨是<span class="large-text-cn">单曲循环</span><br/>只有<span class="ultralarge-text-cn">终身VIP</span>才能听</p>
+                <p class="small-text-en">Mom's nagging is a single-track loop, but only for lifetime VIPs</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-ticket-alt"></i></div>
+        </motion.section>
+        
+        <motion.section
+            class="bento-item md:col-span-2 highlight-seafoam-green"
+            initial={{ opacity: 0, y: 80 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.8, delay: 0.2}}
+        >
+            <div class="flex items-center mb-4">
+                <div class="line-art-icon-container !mr-4 !mb-0"><i class="fas fa-water text-teal-400"></i></div>
+                <div>
+                    <h2 class="large-text-cn text-teal-100">致我们的超人妈妈</h2>
+                    <p class="small-text-en">To My Fisherwoman Mom</p>
+                </div>
+            </div>
+            <p class="text-gray-300">感谢您乘风破浪，为我们捕捞生活的美好与鲜甜。您的双手，是海的馈赠，也是家的温暖。
+            <br/>Thank you for riding the winds and waves, fishing for the beauty and sweetness of life for us. Your hands are a gift from the sea and the warmth of home.
+            </p>
+            <div class="flex justify-around mt-6">
+                <i class="fas fa-fish fa-2x text-sky-300" title="鱼 Fish"></i>
+                <i class="fas fa-shrimp fa-2x text-orange-300" title="虾 Shrimp"></i>
+                <i class="fas fa-grip-horizontal fa-2x text-red-300" title="螃蟹 Crab/Net"></i>
+                <i class="fas fa-fan fa-2x text-pink-300" title="海螺 Seashell"></i>
+                <i class="fas fa-bug fa-2x text-yellow-400" title="沙虫 Sandworm (conceptual)"></i>
+            </div>
+        </motion.section>
+
+    </main>
+
+    <footer class="text-center py-12 mt-10 md:mt-16 border-t border-gray-700/50">
+        <p class="text-gray-400">献给所有伟大的母亲 <span class="text-pink-400">&hearts;</span> With Love & Gratitude</p>
+        <p class="small-text-en text-gray-500 mt-1">Happy Mother's Day 2025</p>
+    </footer>
+
+    <script>
+        const { motion } = Motion; // Assuming Motion is globally available from CDN
+        
+        // No Chart.js needed for this page as per content.
+        // Framer Motion's declarative syntax in HTML attributes handles basic entry animations.
+        // For Apple-like scroll-driven animations, more complex JavaScript using Framer Motion's
+        // useScroll and useTransform hooks (or their non-React equivalents if not using React)
+        // would be necessary.
+
+        console.log("母亲节快乐网页加载完毕! Happy Mother's Day Page Loaded!");
+    </script>
+</body>
+</html>
