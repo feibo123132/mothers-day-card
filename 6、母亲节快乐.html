@@ -126,8 +126,8 @@
 </head>
 <body class="antialiased">
 
-    <audio id="backgroundMusic" loop autoplay>
-      <source src="https://feibo123132.github.io/mothers-day-card/6、母亲节快乐 Tales From the Snow Mountain.mp3" type="audio/mpeg">
+    <audio id="backgroundMusic" preload="auto">
+      <source src="https://raw.githubusercontent.com/feibo123132/mother-s-day/main/6%E3%80%81%E6%AF%8D%E4%BA%B2%E8%8A%82%E5%BF%AB%E4%B9%90%20Tales%20From%20the%20Snow%20Mountain.mp3" type="audio/mpeg">
     </audio>
 
     <button onclick="document.getElementById('backgroundMusic').play()" class="fixed bottom-4 right-4 bg-sky-500 text-white p-3 rounded-full shadow-lg hover:bg-sky-600 transition-colors z-50">
@@ -184,33 +184,12 @@
             initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.1 }}
         >
             <div>
-                <p class="medium-text-cn">羡慕我爸娶到了<br/>这个世界上<span class="large-text-cn">最好的女人</span></p>
+                <p class="medium-text-cn">羡慕我爸娶到了<br/>这个世界上<span class="ultralarge-text-cn">最好的女人</span></p>
                 <p class="small-text-en">I envy my dad for marrying the best woman in the world</p>
             </div>
             <div class="line-art-icon-container"><i class="fas fa-gem"></i></div>
         </motion.section>
-
-        <motion.section
-            class="bento-item highlight-coral-reef"
-            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.15 }}
-        >
-            <div>
-                <p class="medium-text-cn">在成为妈妈前<br/>她也只是个爱撒娇的<span class="large-text-cn">女孩</span></p>
-                <p class="small-text-en">Every mom, before becoming a mom, was also a sweet young girl</p>
-            </div>
-            <div class="line-art-icon-container"><i class="fas fa-fan"></i></div> </motion.section>
-
-        <motion.section
-            class="bento-item highlight-deep-sea-blue"
-            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.2 }}
-        >
-            <div>
-                <p class="medium-text-cn">别人关注我们钱包<br/>只有她关心我们<span class="large-text-cn">吃饱</span></p>
-                <p class="small-text-en">Others care about my wealth, only she cares about my well-being</p>
-            </div>
-            <div class="line-art-icon-container"><i class="fas fa-anchor"></i></div>
-        </motion.section>
-
+        
         <motion.section
             class="bento-item highlight-pearl-white"
             initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.25 }}
@@ -223,13 +202,35 @@
         </motion.section>
         
         <motion.section
+            class="bento-item highlight-deep-sea-blue"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.2 }}
+        >
+            <div>
+                <p class="medium-text-cn">别人关注我们钱包<br/>而妈妈关心我们有没有<span class="ultralarge-text-cn">吃好</span></p>
+                <p class="small-text-en">Others care about my wealth, only she cares about my well-being</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-anchor"></i></div>
+        </motion.section>
+
+        <motion.section
+            class="bento-item highlight-coral-reef"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.15 }}
+        >
+            <div>
+                <p class="medium-text-cn">在成为妈妈前<br/>或许她也只是个爱撒娇的<span class="ultralarge-text-cn">女孩</span></p>
+                <p class="small-text-en">Every mom, before becoming a mom, was also a sweet young girl</p>
+            </div>
+            <div class="line-art-icon-container"><i class="fas fa-fan"></i></div> 
+        </motion.section>
+        
+        <motion.section
             class="bento-item md:col-span-2 highlight-seafoam-green"
             initial={{ opacity: 0, y: 80 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.8, delay: 0.2}}
         >
             <div class="flex items-center mb-4">
                 <div class="line-art-icon-container !mr-4 !mb-0"><i class="fas fa-water text-teal-400"></i></div>
                 <div>
-                    <h2 class="large-text-cn text-teal-100">致我们的超人妈妈</h2>
+                    <h2 class="large-text-cn text-teal-100">致我们的万能妈妈</h2>
                     <p class="small-text-en">To My Fisherwoman Mom</p>
                 </div>
             </div>
