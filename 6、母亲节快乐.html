@@ -127,7 +127,7 @@
 <body class="antialiased">
 
     <audio id="backgroundMusic" preload="auto">
-      <source src="https://raw.githubusercontent.com/feibo123132/mother-s-day/main/6%E3%80%81%E6%AF%8D%E4%BA%B2%E8%8A%82%E5%BF%AB%E4%B9%90%20Tales%20From%20the%20Snow%20Mountain.mp3" type="audio/mpeg">
+      <source src="https://feibo123132.github.io/mothers-day-card/6、母亲节快乐 Tales From the Snow Mountain.mp3" type="audio/mpeg">
     </audio>
 
     <button onclick="document.getElementById('backgroundMusic').play()" class="fixed bottom-4 right-4 bg-sky-500 text-white p-3 rounded-full shadow-lg hover:bg-sky-600 transition-colors z-50">
@@ -264,5 +264,107 @@
 
         console.log("母亲节快乐网页加载完毕! Happy Mother's Day Page Loaded!");
     </script>
+
+    <script>
+    const audio = document.getElementById('backgroundMusic');
+    const playButton = document.querySelector('button[onclick*="backgroundMusic.play()"]'); // 获取按钮
+
+    // 尝试在页面加载后主动加载，但不强制
+    window.addEventListener('load', () => {
+        // 对于移动端，preload="auto" 和用户点击播放通常是主要驱动力
+        // audio.load(); // 可以取消注释这行来试试，但有时反而会重置已有的缓冲
+        console.log("页面加载完毕，浏览器应根据 preload='auto' 处理音频加载。");
+    });
+
+    if (playButton) {
+        playButton.addEventListener('click', function() {
+            console.log("播放按钮点击。");
+            // 确保在播放前音频对象是可用的
+            if (audio) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // 播放成功
+                        console.log("音频开始播放或已在播放。");
+                        // 可在此处更改播放按钮图标为暂停
+                        playButton.innerHTML = '<i class="fas fa-pause"></i> 暂停音乐';
+                        playButton.onclick = function() { audio.pause(); /* 更多逻辑见下文 */ };
+                    })
+                    .catch(error => {
+                        // 播放失败，通常是因为用户未与页面交互
+                        console.error("自动播放被阻止或发生错误:", error);
+                        // 可以提示用户再次点击或检查设置
+                        // alert("无法自动播放，请再次点击按钮。");
+                        // 在某些情况下，特别是iOS，第一次交互后就能播放
+                        // 如果 audio.load() 没在 window load 时调用，可以在这里调用一次
+                        // audio.load();
+                        // audio.play(); // 再次尝试播放
+                    });
+                }
+            }
+        });
+    }
+
+    // (可选) 添加缓冲和错误监控，以了解发生了什么
+    audio.addEventListener('waiting', () => {
+        console.log("音频缓冲中...");
+        // 在此显示加载动画
+        if(playButton) playButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 加载中';
+    });
+
+    audio.addEventListener('canplay', () => { // 或者 'canplaythrough'
+        console.log("音频可以开始播放了。");
+        // 如果之前显示了加载动画，并且不是正在播放，恢复播放按钮
+        if (audio.paused && playButton.innerHTML.includes('fa-spinner')) {
+             // 更新按钮的逻辑需要更完善，见下方 togglePlay 函数
+        }
+    });
+    
+    audio.addEventListener('playing', () => {
+      if(playButton && !playButton.innerHTML.includes('fa-pause')){
+        playButton.innerHTML = '<i class="fas fa-pause"></i> 暂停音乐';
+      }
+    });
+    audio.addEventListener('pause', () => {
+      if(playButton && !playButton.innerHTML.includes('fa-play')){
+        playButton.innerHTML = '<i class="fas fa-play"></i> 播放音乐';
+      }
+    });
+
+    audio.addEventListener('error', (e) => {
+        console.error("音频加载/播放错误:", audio.error);
+        if(playButton) playButton.innerHTML = '<i class="fas fa-exclamation-circle"></i> 播放错误';
+    });
+
+    // 改进的播放/暂停切换功能
+    function togglePlay() {
+        if (audio.paused) {
+            console.log("尝试播放...");
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    playButton.innerHTML = '<i class="fas fa-pause"></i> 暂停音乐';
+                }).catch(error => {
+                    console.error("播放失败:", error);
+                    // 可以尝试 audio.load() 后再播放，但要小心
+                    // audio.load();
+                    // audio.play().then(...).catch(...);
+                });
+            }
+        } else {
+            console.log("尝试暂停...");
+            audio.pause();
+            playButton.innerHTML = '<i class="fas fa-play"></i> 播放音乐';
+        }
+    }
+
+    // 修改按钮的 onclick 事件
+    if (playButton) {
+        playButton.setAttribute('onclick', ''); // 移除旧的内联onclick
+        playButton.addEventListener('click', togglePlay);
+    }
+
+    </script>
+
 </body>
 </html>
