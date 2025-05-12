@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频简化测试 - Audio Simplified Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>音频简化测试页面</h1>
+    <p>这是一个只包含音频播放功能的页面。</p>
+
+    <audio id="testMusic" preload="auto">
+        <source src="https://feibo123132.github.io/mothers-day-card/6、HOYO-MiX - 华灯星聚 Myriad of Lights.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+    </audio>
+
+    <button id="playTestButton">播放测试音乐</button>
+
+    <div id="status">等待操作...</div>
+
+    <script>
+        const testAudio = document.getElementById('testMusic');
+        const playTestButton = document.getElementById('playTestButton');
+        const statusDiv = document.getElementById('status');
+
+        function logStatus(message) {
+            console.log(message);
+            statusDiv.textContent = message;
+        }
+
+        function togglePlayTest() {
+            if (!testAudio) {
+                logStatus("错误：找不到音频元素！");
+                return;
+            }
+
+            if (testAudio.paused) {
+                logStatus("尝试播放...");
+                const playPromise = testAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        logStatus("音频正在播放...");
+                        playTestButton.textContent = '暂停测试音乐';
+                    }).catch(error => {
+                        logStatus(`播放失败: ${error.name} - ${error.message}`);
+                        console.error("播放失败详情:", error);
+                        // 尝试在用户明确交互后加载（某些移动浏览器需要）
+                        // testAudio.load(); 
+                        // testAudio.play().then(...).catch(...); // 再次尝试，但注意逻辑
+                    });
+                }
+            } else {
+                testAudio.pause();
+                logStatus("音频已暂停。");
+                playTestButton.textContent = '播放测试音乐';
+            }
+        }
+
+        if (playTestButton) {
+            playTestButton.addEventListener('click', togglePlayTest);
+        } else {
+            logStatus("错误：找不到播放按钮！");
+        }
+
+        // 音频事件监听器 (可选，但有助于调试)
+        testAudio.addEventListener('loadstart', () => logStatus('开始加载音频元数据...'));
+        testAudio.addEventListener('loadedmetadata', () => logStatus('元数据加载完毕。'));
+        testAudio.addEventListener('loadeddata', () => logStatus('当前播放位置数据已加载。'));
+        testAudio.addEventListener('progress', () => {
+            if (testAudio.buffered.length > 0) {
+                const bufferedEnd = testAudio.buffered.end(testAudio.buffered.length - 1);
+                const duration = testAudio.duration;
+                if (duration > 0) {
+                    const percent = (bufferedEnd / duration) * 100;
+                    logStatus(`音频已缓冲: ${percent.toFixed(0)}%`);
+                }
+            }
+        });
+        testAudio.addEventListener('canplay', () => logStatus('音频可以开始播放了。'));
+        testAudio.addEventListener('canplaythrough', () => logStatus('音频可以流畅播放完毕。'));
+        testAudio.addEventListener('waiting', () => logStatus('音频缓冲中...'));
+        testAudio.addEventListener('playing', () => {
+            logStatus('音频正在播放...');
+            if(playTestButton && testAudio.paused === false) playTestButton.textContent = '暂停测试音乐';
+        });
+        testAudio.addEventListener('pause', () => {
+            logStatus('音频已暂停。');
+             if(playTestButton) playTestButton.textContent = '播放测试音乐';
+        });
+        testAudio.addEventListener('ended', () => logStatus('音频播放完毕。'));
+        testAudio.addEventListener('error', (e) => {
+            let errorMsg = '音频发生错误。';
+            if (testAudio.error) {
+                switch (testAudio.error.code) {
+                    case MediaError.MEDIA_ERR_ABORTED:
+                        errorMsg = '音频播放被中止。';
+                        break;
+                    case MediaError.MEDIA_ERR_NETWORK:
+                        errorMsg = '网络错误导致音频下载失败。';
+                        break;
+                    case MediaError.MEDIA_ERR_DECODE:
+                        errorMsg = '音频解码错误。';
+                        break;
+                    case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                        errorMsg = '音频源格式不支持。';
+                        break;
+                    default:
+                        errorMsg = `发生未知错误，代码: ${testAudio.error.code}`;
+                }
+            }
+            logStatus(errorMsg);
+            console.error("音频错误详情: ", e, testAudio.error);
+        });
+
+        logStatus("简化测试页面加载完毕。");
+
+    </script>
+</body>
+</html>
